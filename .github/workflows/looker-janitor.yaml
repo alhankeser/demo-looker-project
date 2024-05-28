@@ -41,8 +41,14 @@ jobs:
               id: clean_updated_files
               run: |
                 for updated_file in ${{ steps.changed_files.outputs.all_changed_files }}; do
-                    python looker-janitor/main.py "${updated_file}"
+                    python looker-janitor/main.py "${updated_file}" >> results.txt
                 done
                 git add "${updated_file}"
                 git commit -m "Run Looker Janitor"
                 git push
+            - name: Install Review Dog
+              uses: reviewdog/action-setup@v1
+            - name: Run Review Dog
+              run: |
+                cat results.txt | reviewdog -efm="%f:%l: %m" -diff="git diff FETCH_HEAD" -reporter=looker-janitor -level warning
+

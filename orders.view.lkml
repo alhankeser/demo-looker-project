@@ -84,4 +84,11 @@ view: orders {
     sql: ${TABLE}.total_amount ;;
     value_format: "$#,##0.00"
   }
+
+  measure: total_sales_plus_tax {
+    type: sum
+    description: "Total sales plus tax amount"
+    sql: ${total_tax} + ${total_sales} ;;
+    value_format: "$#,##0.00"
+  }
 }
