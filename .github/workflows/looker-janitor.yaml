@@ -5,16 +5,18 @@ on:
 
 jobs:
     run-looker-janitor:
+        permissions:
+            contents: write
         runs-on: ubuntu-latest
         steps:
-            - name: Configure Git user
-              run : |
-                git config user.name github-actions
-                git config user.email github-actions@github.com
             - name: Checkout Branch
               uses: actions/checkout@v2
               with:
                 ref: ${{ github.event.pull_request.head.ref }}
+            - name: Configure Git user
+              run : |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
             - name: Checkout Looker Janitor
               uses: actions/checkout@v2
               with:
