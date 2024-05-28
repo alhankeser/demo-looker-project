@@ -43,7 +43,7 @@ jobs:
                 for updated_file in ${{ steps.changed_files.outputs.all_changed_files }}; do
                     python looker-janitor/main.py "${updated_file}" >> results.txt
                 done
-                git add .
+                git add "${updated_file}"
                 git commit -m "Run Looker Janitor" || continue
                 git push
             - name: Install Review Dog
