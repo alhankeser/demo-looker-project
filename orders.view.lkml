@@ -30,6 +30,11 @@ view: orders {
     sql: ${TABLE}.total_amount ;;
   }
 
+  dimension: customer_name {
+    sql: ${TABLE}.customer_name ;;
+    type: number
+  }
+
   measure: count {
     type: count
     sql: ${TABLE}.order_id ;;
