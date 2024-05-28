@@ -1,0 +1,46 @@
+name: Looker Janitor
+on:
+    pull_request:
+        types:  [opened, synchronize]
+
+jobs:
+    run-looker-janitor:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Configure Git user
+              run : |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+            - name: Checkout Branch
+              uses: actions/checkout@v2
+              with:
+                ref: ${{ github.event.pull_request.head.ref }}
+            - name: Checkout Looker Janitor
+              uses: actions/checkout@v2
+              with:
+                repository: alhankeser/looker-janitor
+                path: looker-janitor
+                ref: main
+            - name: Install Python
+              uses: actions/setup-python@v2
+              with:
+                python-version: 3.12
+            - name: Install Dependencies
+              run: |
+                pip install regex
+            - name: Get Changed Files
+              id: changed_files
+              uses: tj-actions/changed-files@v44
+              with:
+                files: |
+                    **.view.lkml
+                    **.view.lookml
+            - name: Clean Updated Files
+              id: clean_updated_files
+              run: |
+                for updated_file in ${{ steps.changed_files.outputs.all_changed_files }}; do
+                    python looker-janitor/main.py "${updated_file}"
+                done
+                git add "${updated_file}"
+                git commit -m "Run Looker Janitor"
+                git push
