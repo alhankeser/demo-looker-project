@@ -48,8 +48,8 @@ view: orders {
   }
 
   dimension: tax_amount {
-    type: number
     sql: ${TABLE}.tax_amount ;;
+    type: number
   }
 
   dimension: total_amount {
