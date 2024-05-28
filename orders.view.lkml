@@ -73,6 +73,7 @@ view: orders {
 
   measure: total_sales {
     type: sum
+    group_item_label: "Sales"
     description: "Total sales amount"
     sql: ${TABLE}.total_amount ;;
     value_format: "$#,##0.00"
