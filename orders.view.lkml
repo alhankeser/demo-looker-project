@@ -53,6 +53,11 @@ view: orders {
     value_format: "$#,##0.00"
   }
 
+  dimension: tax_amount {
+    sql: ${TABLE}.tax_amount ;;
+    type: number
+  }
+
   measure: average_order_value {
     type: average
     description: "Average order value"
