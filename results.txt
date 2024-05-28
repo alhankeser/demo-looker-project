@@ -1,0 +1,13 @@
+orders.view.lkml:27:0:dimension 'order_id' missing label
+orders.view.lkml:32:0:dimension 'customer_id' missing label
+orders.view.lkml:37:0:dimension 'customer_name' missing label
+orders.view.lkml:42:0:dimension 'order_date' missing label
+orders.view.lkml:48:0:dimension 'order_status' missing label
+orders.view.lkml:53:0:dimension 'tax_amount' missing label
+orders.view.lkml:59:0:dimension 'total_amount' missing label
+orders.view.lkml:66:0:measure 'average_order_value' missing label,drill_fields
+orders.view.lkml:72:0:measure 'count' missing label,drill_fields
+orders.view.lkml:80:0:measure 'total_sales' missing label,drill_fields
+orders.view.lkml:87:0:measure 'total_sales_plus_tax' missing label,drill_fields
+orders.view.lkml:94:0:measure 'total_tax' missing label,drill_fields
+
