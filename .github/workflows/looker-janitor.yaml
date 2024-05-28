@@ -5,6 +5,8 @@ on:
 
 jobs:
     run-looker-janitor:
+        permissions:
+            contents: write
         runs-on: ubuntu-latest
         steps:
             - name: Checkout Branch
