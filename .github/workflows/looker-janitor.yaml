@@ -44,7 +44,7 @@ jobs:
                     python looker-janitor/main.py "${updated_file}" >> results.txt
                 done
                 git add "${updated_file}"
-                git commit -m "Run Looker Janitor"
+                git commit -m "Run Looker Janitor" || continue
                 git push
             - name: Install Review Dog
               uses: reviewdog/action-setup@v1
