@@ -20,41 +20,6 @@ view: orders {
     sql: ${TABLE}.order_status ;;
   }
 
-  measure: average_order_value {
-    type: average
-    description: "Average order value"
-    sql: ${TABLE}.total_amount ;;
-    value_format: "$#,##0.00"
-  }
-
-  measure: count {
-    type: count
-    description: "Count of orders"
-    sql: ${TABLE}.order_id ;;
-  }
-
-  measure: total_sales {
-    type: sum
-    group_item_label: "Sales"
-    description: "Total sales amount"
-    sql: ${TABLE}.total_amount ;;
-    value_format: "$#,##0.00"
-  }
-
-  measure: total_sales_plus_tax {
-    type: sum
-    description: "Total sales plus tax amount"
-    sql: ${total_tax} + ${total_sales} ;;
-    value_format: "$#,##0.00"
-  }
-
-  measure: total_tax {
-    type: sum
-    description: "Total tax amount"
-    sql: ${TABLE}.total_tax ;;
-    value_format: "$#,##0.00"
-  }
-
   dimension: order_id {
     type: number
     sql: ${TABLE}.order_id ;;
@@ -90,6 +55,41 @@ view: orders {
   dimension: total_amount {
     type: number
     sql: ${TABLE}.total_amount ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: average_order_value {
+    type: average
+    description: "Average order value"
+    sql: ${TABLE}.total_amount ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: count {
+    type: count
+    description: "Count of orders"
+    sql: ${TABLE}.order_id ;;
+  }
+
+  measure: total_sales {
+    type: sum
+    group_item_label: "Sales"
+    description: "Total sales amount"
+    sql: ${TABLE}.total_amount ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_sales_plus_tax {
+    type: sum
+    description: "Total sales plus tax amount"
+    sql: ${total_tax} + ${total_sales} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_tax {
+    type: sum
+    description: "Total tax amount"
+    sql: ${TABLE}.total_tax ;;
     value_format: "$#,##0.00"
   }
 }
