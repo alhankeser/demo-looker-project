@@ -38,7 +38,7 @@ jobs:
                     **.view.lkml
                     **.view.lookml
             - name: Run Looker Janitor
-              uses: alhankeser/looker-janitor@v0.1.1
+              uses: alhankeser/looker-janitor@v0.1.1-alpha
               with:
                 files: ${{ steps.changed_files.outputs.all_changed_files }}
             - name: Commit Cleaned Files
