@@ -10,6 +10,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Run Looker Janitor
-              uses: alhankeser/looker-janitor@v0.1.10-alpha
+              uses: alhankeser/looker-janitor-action@v0.2.2
 
 
