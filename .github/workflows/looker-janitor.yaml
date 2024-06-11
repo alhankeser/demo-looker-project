@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Run Looker Janitor
-              uses: alhankeser/looker-janitor-action@v0.2.3
+              uses: alhankeser/looker-janitor-action@v0.2.4
               with:
                 files: |
                     orders.view.lkml
