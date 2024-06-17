@@ -1,7 +1,3 @@
-
-
-
-
 view: customers {
   sql_table_name: `my_project.dataset.customers` ;;
 

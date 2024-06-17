@@ -1,4 +1,3 @@
-# run looker-janitor: python main.py example_input.view.lkml example_output.view.lkml
 view: orders {
   sql_table_name: `my_project.dataset.orders` ;;
 
