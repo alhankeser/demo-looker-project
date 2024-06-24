@@ -1,10 +1,6 @@
 view: orders {
   sql_table_name: `my_project.dataset.orders` ;;
 
-
-
-
-  
   filter: customer_id_filter {
     type: number
     description: "Filter orders by customer ID"
