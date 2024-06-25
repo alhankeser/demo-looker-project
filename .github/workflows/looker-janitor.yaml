@@ -11,7 +11,7 @@ jobs:
         steps:
             - name: Run Looker Janitor
               id: looker_janitor
-              uses: alhankeser/looker-janitor-action@v0.3.2
+              uses: alhankeser/looker-janitor-action@v0.3.3
               with:
                 check_required_params: true
                 required_dimension: |
