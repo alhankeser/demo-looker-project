@@ -12,6 +12,11 @@ jobs:
             - name: Run Looker Janitor
               id: looker_janitor
               uses: alhankeser/looker-janitor-action@v0.3.0
+              with:
+                check_required_params: true
+                required_dimension: |
+                  hidden
+                  type
             - name: Setup reviewdog
               uses: reviewdog/action-setup@v1
               with:
