@@ -10,5 +10,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Run Looker Janitor
+              id: looker_janitor
               uses: alhankeser/looker-janitor-action@v0.3.0
-                
+            - name: Setup reviewdog
+              uses: reviewdog/action-setup@v1
+              with:
+                reviewdog_version: latest
+            - name: Run reviewdog
+              env:
+                REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                reviewdog -f=looker -reporter=github-pr-check < ${{ steps.looker_janitor.outputs.warnings }}
