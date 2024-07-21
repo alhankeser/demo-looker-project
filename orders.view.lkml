@@ -13,7 +13,11 @@ view: orders {
     sql: ${TABLE}.order_date ;;
   }
 
-  
+  filter: order_status_filter {
+    type: string
+    description: "Filter orders by status"
+    sql: ${TABLE}.order_status ;;
+  }
 
   dimension: order_id {
     type: number
@@ -64,12 +68,6 @@ view: orders {
     type: count
     description: "Count of orders"
     sql: ${TABLE}.order_id ;;
-  }
-
-  filter: order_status_filter {
-    type: string
-    description: "Filter orders by status"
-    sql: ${TABLE}.order_status ;;
   }
 
   measure: total_sales {
