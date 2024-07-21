@@ -11,7 +11,7 @@ jobs:
         steps:
             - name: Run Looker Janitor
               id: looker_janitor
-              uses: alhankeser/looker-janitor-action@v0
+              uses: alhankeser/looker-janitor-action@dev
               with:
                 check_required_params: true
                 required_dimension: |
@@ -23,7 +23,9 @@ jobs:
             - name: Commit Cleaned Files
               id: commit_changes
               run: |
-                git add "${{ steps.changed_files.outputs.all_changed_files }}"
+                for file in ${{ steps.changed_files.outputs.all_changed_files }}; do
+                    git add "${file}"
+                done
                 git commit -m "Run Looker Janitor" || continue
                 git push
               shell: bash
