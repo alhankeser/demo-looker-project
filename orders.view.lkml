@@ -1,4 +1,3 @@
-# run looker-janitor: python main.py example_input.view.lkml example_output.view.lkml
 view: orders {
   sql_table_name: `my_project.dataset.orders` ;;
 
@@ -47,6 +46,11 @@ view: orders {
     sql: ${TABLE}.order_status ;;
   }
 
+  dimension: tax_amount {
+    type: number
+    sql: ${TABLE}.tax_amount ;;
+  }
+
   dimension: total_amount {
     type: number
     sql: ${TABLE}.total_amount ;;
@@ -68,8 +72,23 @@ view: orders {
 
   measure: total_sales {
     type: sum
+    group_item_label: "Sales"
     description: "Total sales amount"
     sql: ${TABLE}.total_amount ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_sales_plus_tax {
+    type: sum
+    description: "Total sales plus tax amount"
+    sql: ${total_tax} + ${total_sales} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_tax {
+    type: sum
+    description: "Total tax amount"
+    sql: ${TABLE}.total_tax ;;
     value_format: "$#,##0.00"
   }
 }
