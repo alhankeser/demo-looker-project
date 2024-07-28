@@ -35,11 +35,19 @@ jobs:
                 git commit -m "Run Looker Janitor" || continue
                 git push
               shell: bash
-            - name: Setup Review Dog
-              uses: reviewdog/action-setup@v1
-            - name: Run Review Dog
-              env:
-                REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Test
+              shell: bash
               run: |
-                cat looker-janitor/output.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-check
+                cat looker-janitor/output.txt
+                echo "hello" > random.txt
+                cat random.txt
+                cat random.txt
+                cat random.txt
+            # - name: Setup Review Dog
+            #   uses: reviewdog/action-setup@v1
+            # - name: Run Review Dog
+            #   env:
+            #     REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #   run: |
+            #     cat looker-janitor/output.txt | reviewdog -efm="%f:%l: %m"
             
