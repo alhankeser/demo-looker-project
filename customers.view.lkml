@@ -23,8 +23,8 @@ view: customers {
   }
 
   measure: avg_customer_age {
-    label: "Avg Customer Age"
     type: avg
+    label: "Avg Customer Age"
     sql: ${age} ;;
   }
 
