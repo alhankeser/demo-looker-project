@@ -33,4 +33,3 @@ view: customers {
     sql: ${TABLE}.customer_id ;;
   }
 }
-  
