@@ -39,10 +39,10 @@ jobs:
               shell: bash
               run: |
                 cat looker-janitor/output.txt
+                echo "'customers.view.lkml:24: measure '"'"'avg_customer_age'"'"' missing value_format_name" > looker-janitor/output.txt
                 echo "hello" > random.txt
                 cat random.txt
-                cat random.txt
-                cat random.txt
+                cat looker-janitor/output.txt
             # - name: Setup Review Dog
             #   uses: reviewdog/action-setup@v1
             # - name: Run Review Dog
