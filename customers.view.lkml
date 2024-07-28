@@ -22,13 +22,13 @@ view: customers {
     sql: ${TABLE}.customer_name ;;
   }
 
-  measure: customer_count {
-    type: count_distinct
-    sql: ${TABLE}.customer_id ;;
-  }
-
   measure: avg_customer_age {
     type: avg
     sql: ${age} ;;
+  }
+
+  measure: customer_count {
+    type: count_distinct
+    sql: ${TABLE}.customer_id ;;
   }
 }
