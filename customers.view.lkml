@@ -21,7 +21,6 @@ view: customers {
     type: number
     sql: ${TABLE}.customer_name ;;
   }
-
   measure: avg_customer_age {
     type: avg
     label: "Avg Customer Age"
