@@ -26,4 +26,9 @@ view: customers {
     type: count_distinct
     sql: ${TABLE}.customer_id ;;
   }
+
+  measure: avg_customer_age {
+    type: avg
+    sql: ${age} ;;
+  }
 }
