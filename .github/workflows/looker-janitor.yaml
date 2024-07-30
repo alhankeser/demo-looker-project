@@ -45,4 +45,4 @@ jobs:
               env:
                 REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                customers.view.lkml:9: dimension 'age' missing hidden | reviewdog -efm="%f:%l: %m"
+                reviewdog -efm="%f:%l: %m" < "customers.view.lkml:9: dimension 'age' missing hidden"
