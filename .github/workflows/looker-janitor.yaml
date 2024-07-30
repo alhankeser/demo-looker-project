@@ -19,6 +19,10 @@ jobs:
                   type
                 required_measure: |
                   value_format_name
+            - name: Test output
+              shell: bash
+              run: |
+                echo ${{ steps.looker_janitor.outputs.results }}
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
@@ -35,19 +39,11 @@ jobs:
                 git commit -m "Run Looker Janitor" || continue
                 git push
               shell: bash
-            - name: Test
-              shell: bash
+            - name: Setup Review Dog
+              uses: reviewdog/action-setup@v1
+            - name: Run Review Dog
+              env:
+                REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                cat looker-janitor/output.txt
-                echo "'customers.view.lkml:24: measure '"'"'avg_customer_age'"'"' missing value_format_name" > looker-janitor/output.txt
-                echo "hello" > random.txt
-                cat random.txt
-                cat looker-janitor/output.txt
-            # - name: Setup Review Dog
-            #   uses: reviewdog/action-setup@v1
-            # - name: Run Review Dog
-            #   env:
-            #     REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            #   run: |
-            #     cat looker-janitor/output.txt | reviewdog -efm="%f:%l: %m"
+                echo ${{ steps.looker_janitor.outputs.results }} | reviewdog -efm="%f:%l: %m"
             
