@@ -22,7 +22,9 @@ jobs:
             - name: Test output
               shell: bash
               run: |
-                echo "${{ steps.looker_janitor.outputs.results }}"
+                modified_output="${{ steps.looker_janitor.outputs.results }}"
+                output="${modified_output//$'%0A'/'\n'}"
+                echo "$output"
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
@@ -45,4 +47,6 @@ jobs:
               env:
                 REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                reviewdog -efm="%f:%l: %m" < "customers.view.lkml:9: dimension 'age' missing hidden"
+                modified_output="${{ steps.looker_janitor.outputs.results }}"
+                output="${modified_output//$'%0A'/'\n'}"
+                output | reviewdog -efm="%f:%l: %m" -diff="git diff FETCH_HEAD" -reporter=github-pr-check -level warning
