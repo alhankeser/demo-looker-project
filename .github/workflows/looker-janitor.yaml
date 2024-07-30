@@ -22,8 +22,7 @@ jobs:
             - name: Test output
               shell: bash
               run: |
-                decoded = $(echo "${{ steps.looker_janitor.outputs.results }}" | base64 --decode)
-                echo "$decoded"
+                echo "${{ steps.looker_janitor.outputs.results }}"
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
