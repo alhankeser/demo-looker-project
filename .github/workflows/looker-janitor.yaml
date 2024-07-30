@@ -50,6 +50,6 @@ jobs:
               run: |
                 outputs="${{ steps.looker_janitor.outputs.results }}"
                 outputs="${outputs//'%0A'/$'\n'}"
-                for output in $outputs; do
-                  echo "$output" | reviewdog -efm="%f:%l: %m" -diff="git diff FETCH_HEAD" -reporter=github-pr-check -level warning
+                for message in $outputs; do
+                  echo "${message}" | reviewdog -efm="%f:%l: %m" -diff="git diff FETCH_HEAD" -reporter=github-pr-check -level warning
                 done
