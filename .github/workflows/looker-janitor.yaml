@@ -22,9 +22,7 @@ jobs:
             - name: Test output
               shell: bash
               run: |
-                output="${{ steps.looker_janitor.outputs.results }}"
-                output="${output//'%0A'/$'\n'}"
-                echo "$output"
+               echo "cat results.txt"
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
@@ -48,8 +46,5 @@ jobs:
               env:
                 REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                messages="${{ steps.looker_janitor.outputs.results }}"
-                messages="${messages//'%0A'/$'\n'}"
-                echo "$messages" >> results.txt
                 cat results.txt | reviewdog -efm="%f:%l: %m" -diff="git diff FETCH_HEAD" -reporter=github-pr-check -level warning
 
