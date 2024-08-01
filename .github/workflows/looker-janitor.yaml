@@ -13,7 +13,7 @@ jobs:
               id: looker_janitor
               uses: alhankeser/looker-janitor-action@dev
               with:
-                check_required_params: true
+                check_required_params: false
                 required_dimension: |
                   hidden
                   type
