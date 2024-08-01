@@ -22,7 +22,7 @@ jobs:
             - name: Test output
               shell: bash
               run: |
-                cat results.txt
+                cat looker-janitor/output.txt
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
