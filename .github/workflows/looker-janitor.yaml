@@ -17,6 +17,12 @@ jobs:
                 required_dimension: |
                   hidden
                   type
+                required_measure: |
+                  value_format_name
+            - name: Test output
+              shell: bash
+              run: |
+                cat looker-janitor/output.txt
             - name: Get Changed Files
               id: changed_files
               uses: tj-actions/changed-files@v44
@@ -25,7 +31,6 @@ jobs:
                     **.view.lkml
                     **.view.lookml
             - name: Commit Cleaned Files
-              id: commit_changes
               run: |
                 for file in ${{ steps.changed_files.outputs.all_changed_files }}; do
                     git add "${file}"
@@ -33,3 +38,12 @@ jobs:
                 git commit -m "Run Looker Janitor" || continue
                 git push
               shell: bash
+            - name: Setup Review Dog
+              uses: reviewdog/action-setup@v1
+            - name: Run Review Dog
+              shell: bash
+              env:
+                REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                cat looker-janitor/output.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-annotations -level warning -filter-mode=nofilter
+
