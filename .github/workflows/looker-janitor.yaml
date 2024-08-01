@@ -13,7 +13,7 @@ jobs:
               id: looker_janitor
               uses: alhankeser/looker-janitor-action@dev
               with:
-                check_required_params: false
+                check_required_params: true
                 required_dimension: |
                   hidden
                   type
@@ -31,7 +31,6 @@ jobs:
                     **.view.lkml
                     **.view.lookml
             - name: Commit Cleaned Files
-              id: commit_changes
               run: |
                 for file in ${{ steps.changed_files.outputs.all_changed_files }}; do
                     git add "${file}"
